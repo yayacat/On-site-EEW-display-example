@@ -9,6 +9,17 @@ body {
 @layer base {
   :root {
     --background: 0 0% 96.1%; /* #F5F5F5 */
+    --intensity-0: #202020;
+    --intensity-1: #003264;
+    --intensity-2: #0064c8;
+    --intensity-3: #1e9632;
+    --intensity-4: #ffc800;
+    --intensity-5: #ff9600;
+    --intensity-6: #ff6400;
+    --intensity-7: #ff0000;
+    --intensity-8: #c00000;
+    --intensity-9: #9600c8;
+
     --foreground: 0 0% 3.9%; /* #0A0A0A */
 
     --card: 0 0% 100%; /* #FFFFFF */
@@ -99,4 +110,56 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Adapted intensity color styles for the estimate-color class */
+.intensity-num-1.estimate-color {
+  background: linear-gradient(
+    var(--intensity-1),
+    var(--intensity-0) 80%,
+    var(--intensity-0) 40%,
+    var(--intensity-0)
+  );
+}
+
+.intensity-num-2.estimate-color {
+  background: linear-gradient(var(--intensity-2), var(--intensity-1));
+}
+
+.intensity-num-3.estimate-color {
+  background: linear-gradient(var(--intensity-3), var(--intensity-2));
+}
+
+.intensity-num-4.estimate-color {
+  background: linear-gradient(var(--intensity-4), var(--intensity-3));
+}
+
+.intensity-num-5.estimate-color {
+  background: linear-gradient(var(--intensity-5), var(--intensity-4));
+}
+
+.intensity-num-6.estimate-color {
+  background: linear-gradient(var(--intensity-6), var(--intensity-5));
+}
+
+.intensity-num-7.estimate-color {
+  background: linear-gradient(var(--intensity-7), var(--intensity-6));
+}
+
+.intensity-num-8.estimate-color {
+  background: linear-gradient(var(--intensity-8), var(--intensity-7));
+}
+
+.intensity-num-9.estimate-color {
+  background: linear-gradient(var(--intensity-9), var(--intensity-8));
+}
+
+/* You might need to adjust padding, border, or other styles for .estimate-color
+   to match the appearance of the original .color elements if necessary. */
+
+/* Example: Basic styling for estimate-color (adjust as needed) */
+.estimate-color {
+  /* Add basic width, height, or padding if needed to make the background visible */
+  /* width: 20px; */
+  /* height: 20px; */
 }

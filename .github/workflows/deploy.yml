@@ -31,8 +31,8 @@ jobs:
           context: .
           push: true
           tags: |
-            docker.io/${{ secrets.DOCKER_USERNAME }}/On_site_EEW_display:latest
-            docker.io/${{ secrets.DOCKER_USERNAME }}/On_site_EEW_display:${{ github.sha }}
+            docker.io/${{ secrets.DOCKER_USERNAME }}/on_site_eew_display:latest
+            docker.io/${{ secrets.DOCKER_USERNAME }}/on_site_eew_display:${{ github.sha }}
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v0.1.9
@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/On_site_EEW_display:latest
-            docker stop On_site_EEW_display || true
-            docker rm On_site_EEW_display || true
-            docker run -d --name On_site_EEW_display -p 3000:3000 docker.io/${{ secrets.DOCKER_USERNAME }}/On_site_EEW_display:latest
+            docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/on_site_eew_display:latest
+            docker stop on_site_eew_display || true
+            docker rm on_site_eew_display || true
+            docker run -d --name on_site_eew_display -p 3000:3000 docker.io/${{ secrets.DOCKER_USERNAME }}/on_site_eew_display:latest

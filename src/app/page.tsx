@@ -1,3 +1,9 @@
+import EventEstimatePage from "@/components/event-estimate-page";
+
 export default function Home() {
-  return <></>;
+  return (
+    <main>
+      <EventEstimatePage />
+    </main>
+  );
 }

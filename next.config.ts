@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  basePath: '/test', // Add your subdirectory here
 };
 
 export default nextConfig;

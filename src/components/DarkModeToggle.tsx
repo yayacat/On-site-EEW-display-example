@@ -33,7 +33,7 @@ const DarkModeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="px-4 py-2 bg-gray-200 text-gray-800 rounded dark:bg-gray-700 dark:text-gray-200"
+      className="fixed bottom-4 right-4 px-4 py-2 bg-gray-200 text-gray-800 rounded dark:bg-gray-700 dark:text-gray-200 z-50"
     >
       切換 {isDarkMode ? '閃瞎 模式' : '護眼 模式'}
     </button>

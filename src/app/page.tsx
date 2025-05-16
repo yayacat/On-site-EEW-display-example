@@ -2,11 +2,13 @@
 
 import EstimateCard from "@/components/EstimateCard";
 import DarkModeToggle from "@/components/DarkModeToggle";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
   const [currentTime, setCurrentTime] = useState("");
   const [currentEstimate, setCurrentEstimate] = useState("--"); // Start with the first estimate
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const updateCurrentTime = () => {
@@ -29,16 +31,21 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const estimateSequence = ['--', '0', '1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
-    let currentIndex = estimateSequence.indexOf(currentEstimate);
+    const isDevMode = searchParams.get('dev')?.startsWith('true');
 
-    const intervalId = setInterval(() => {
-      currentIndex = (currentIndex + 1) % estimateSequence.length;
-      setCurrentEstimate(estimateSequence[currentIndex]);
-    }, 1000); // Update every second
+    if (isDevMode) {
+      const estimateSequence = ['--', '0', '1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
+      let currentIndex = estimateSequence.indexOf(currentEstimate);
 
-    return () => clearInterval(intervalId); // Cleanup on unmount
-  }, [currentEstimate]); // Re-run effect if currentEstimate changes to find correct index
+      const intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % estimateSequence.length;
+        setCurrentEstimate(estimateSequence[currentIndex]);
+      }, 1000); // Update every second
+      return () => clearInterval(intervalId); // Cleanup on unmount
+    } else {
+      setCurrentEstimate("--"); // Set default value if not in dev mode
+    }
+  }, [searchParams, currentEstimate]); // Re-run effect if searchParams or currentEstimate changes
 
 
 
@@ -46,7 +53,7 @@ export default function Home() {
     <main>
       <EstimateCard
         dateTime={currentTime}
-        title="現地預估"
+        title={searchParams.get('dev')?.startsWith('true') ? '現地預估測試' : '現地預估'}
         estimate={currentEstimate}
       />
       <DarkModeToggle />

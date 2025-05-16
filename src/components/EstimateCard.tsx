@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface EstimateCardProps {
   dateTime: string;
   title: string;
   estimate: string;
 }
+
+
 
 const EstimateCard: React.FC<EstimateCardProps> = ({ dateTime, title, estimate }) => {
   const intensityColors: { [key: string]: string } = {
@@ -20,6 +22,12 @@ const EstimateCard: React.FC<EstimateCardProps> = ({ dateTime, title, estimate }
     '6+': '#c00000',
     '7': '#9600c8',
   };
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const estimateTextColor = intensityColors[estimate] || '#000000'; // Default text color if estimate doesn't match (e.g., black)
 
@@ -47,9 +55,13 @@ const EstimateCard: React.FC<EstimateCardProps> = ({ dateTime, title, estimate }
     <div className="border border-gray-300 p-6 rounded-md shadow-md max-w-sm mx-auto bg-white dark:bg-gray-700">
       <div className="text-sm text-gray-500 mb-2 text-center">{dateTime}</div>
       <div className="text-xl font-bold text-center mb-4 dark:text-white">{title}</div>
-      <div className="text-6xl font-bold text-center estimate-color flex items-center justify-center" style={{ color: estimateTextColor }}>
-        {renderEstimate()}
-      </div>
+      {isClient ? (
+        <div className="text-6xl font-bold text-center estimate-color flex items-center justify-center" style={{ color: estimateTextColor }}>
+          {renderEstimate()}
+        </div>
+      ) : (
+        <div className="text-6xl font-bold text-center estimate-color flex items-center justify-center">{/* Placeholder or server-friendly content */}</div>
+      )}
     </div>
   );
 };

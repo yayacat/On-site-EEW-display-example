@@ -45,4 +45,4 @@ jobs:
             docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/on_site_eew_display:latest
             docker stop on_site_eew_display || true
             docker rm on_site_eew_display || true
-            docker run -d --name on_site_eew_display -p 3000:3000 docker.io/${{ secrets.DOCKER_USERNAME }}/on_site_eew_display:latest
+            docker run -d --name on_site_eew_display -p 3000:3000 --restart unless-stopped docker.io/${{ secrets.DOCKER_USERNAME }}/on_site_eew_display:latest

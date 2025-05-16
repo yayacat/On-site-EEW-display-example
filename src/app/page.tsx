@@ -13,13 +13,37 @@ function PageContent() {
   const [currentEstimate, setCurrentEstimate] = useState("--"); // Start with the first estimate
   const searchParams = useSearchParams();
 
-  const searchCity = searchParams.get('city') || '臺南市';
-  const searchTown = searchParams.get('town') || '歸仁區';
+  // Get city and town from localStorage, fallback to searchParams, then default
+  const storedCity = typeof window !== 'undefined' ? localStorage.getItem('city') : null;
+  const storedTown = typeof window !== 'undefined' ? localStorage.getItem('town') : null;
+
+  const searchCity = searchParams.get('city') || storedCity || '臺南市'; // Use searchParams, then stored, then default
+
+  // Get town, clean up if it contains extra parameters, then fallback to stored, then default
+  let searchTown = searchParams.get('town');
+  if (searchTown && searchTown.includes('?')) {
+    searchTown = searchTown.split('?')[0];
+  }
+  searchTown = searchTown || storedTown || '歸仁區'; // Use cleaned searchParams, then stored, then default
+
+
   const isDevMode = searchParams.get('dev')?.startsWith('true');
 
   const { maxIntensity: earthquakeMax } = useEarthquakeData({ city: searchCity, town: searchTown, isDevMode });
 
+  // Save city and town to localStorage whenever they are determined
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (searchCity) {
+        localStorage.setItem('city', searchCity);
+      }
+      if (searchTown) {
+        localStorage.setItem('town', searchTown);
+      }
+    }
+  }, [searchCity, searchTown]); // Depend on searchCity and searchTown
 
+  // Effect for updating current time
   useEffect(() => {
     const updateCurrentTime = () => {
       const now = new Date();
@@ -40,6 +64,7 @@ function PageContent() {
     return () => clearInterval(intervalId); // Cleanup on unmount
   }, []);
 
+  // Effect for handling earthquake data and updating estimate
   useEffect(() => {
     if (isDevMode) {
       if (earthquakeMax != null) {

@@ -41,6 +41,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
+            docker image prune -f
             docker pull docker.io/${{ secrets.DOCKER_USERNAME }}/on_site_eew_display:latest
             docker stop on_site_eew_display || true
             docker rm on_site_eew_display || true

@@ -153,13 +153,3 @@ body {
 .intensity-num-9.estimate-color {
   background: linear-gradient(var(--intensity-9), var(--intensity-8));
 }
-
-/* You might need to adjust padding, border, or other styles for .estimate-color
-   to match the appearance of the original .color elements if necessary. */
-
-/* Example: Basic styling for estimate-color (adjust as needed) */
-.estimate-color {
-  /* Add basic width, height, or padding if needed to make the background visible */
-  /* width: 20px; */
-  /* height: 20px; */
-}

@@ -1,7 +1,6 @@
 import type {Metadata} from 'next';
 import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.css';
-import { Toaster } from "@/components/ui/toaster"; // Added Toaster
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -14,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Event Estimate App', // Updated title
-  description: 'AI-powered event attendance estimation', // Updated description
+  title: 'On-site EEW App', // Updated title
+  description: 'On-site EEW display', // Updated description
 };
 
 export default function RootLayout({
@@ -24,10 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-TW">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
-        <Toaster /> {/* Added Toaster */}
       </body>
     </html>
   );

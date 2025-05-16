@@ -51,7 +51,7 @@ function PageContent() {
 
 
   return (
-    <main>
+    <main className="mt-8">
       <EstimateCard
         dateTime={currentTime}
         title={searchParams.get('dev')?.startsWith('true') ? '現地預估測試' : '現地預估'}

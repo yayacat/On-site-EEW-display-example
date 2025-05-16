@@ -4,8 +4,9 @@ import EstimateCard from "@/components/EstimateCard";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from 'react';
 
-export default function Home() {
+function PageContent() {
   const [currentTime, setCurrentTime] = useState("");
   const [currentEstimate, setCurrentEstimate] = useState("--"); // Start with the first estimate
   const searchParams = useSearchParams();
@@ -58,6 +59,14 @@ export default function Home() {
       />
       <DarkModeToggle />
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PageContent />
+    </Suspense>
   );
 }
 

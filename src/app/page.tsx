@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [currentTime, setCurrentTime] = useState("");
-  const [currentEstimate, setCurrentEstimate] = useState("0"); // Start with the first estimate
+  const [currentEstimate, setCurrentEstimate] = useState("--"); // Start with the first estimate
 
   useEffect(() => {
     const updateCurrentTime = () => {
@@ -29,7 +29,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const estimateSequence = ['0', '1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
+    const estimateSequence = ['--', '0', '1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
     let currentIndex = estimateSequence.indexOf(currentEstimate);
 
     const intervalId = setInterval(() => {
